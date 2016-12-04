@@ -7,7 +7,7 @@
       <Diagram DiagramId="893d86c887de481696a87f45c38e439a" Name="Diagram1">
         <EntityTypeShape EntityType="CarRentalModel.Booking" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.Car" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarRentalModel.CarType" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.CarType" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.Client" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.Rent" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="CarRentalModel.FK_Bookings_CarTypes" ManuallyRouted="false" />

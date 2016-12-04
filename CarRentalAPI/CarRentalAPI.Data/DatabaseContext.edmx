@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bookings">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="CarType" Type="tinyint" Nullable="false" />
           <Property Name="DateFrom" Type="smalldatetime" Nullable="false" />
@@ -33,7 +33,9 @@
           <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DayPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="DayMultiplier" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="KilometerPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="KilometerMultiplier" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -164,8 +166,7 @@
             <End Role="Rents" EntitySet="Rents" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -205,6 +206,8 @@
           <Property Name="KilometerPrice" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_CarTypes" FromRole="CarTypes" ToRole="Bookings" />
           <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_CarTypes" FromRole="CarTypes" ToRole="Cars" />
+          <Property Name="DayMultiplier" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="KilometerMultiplier" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -372,6 +375,8 @@
           <EntitySetMapping Name="CarTypes">
             <EntityTypeMapping TypeName="CarRentalModel.CarType">
               <MappingFragment StoreEntitySet="CarTypes">
+                <ScalarProperty Name="KilometerMultiplier" ColumnName="KilometerMultiplier" />
+                <ScalarProperty Name="DayMultiplier" ColumnName="DayMultiplier" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DayPrice" ColumnName="DayPrice" />
