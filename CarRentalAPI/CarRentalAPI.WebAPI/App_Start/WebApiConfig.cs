@@ -2,6 +2,7 @@
 using CarRentalAPI.Data;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
+using System.Web.Http.Cors;
 
 namespace CarRentalAPI.WebAPI
 {
@@ -19,6 +20,9 @@ namespace CarRentalAPI.WebAPI
             //    routeTemplate: "api/{controller}/{id}",
             //    defaults: new { id = RouteParameter.Optional }
             //);
+
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             config.Count().Filter().OrderBy().Expand().Select().MaxTop(null);
