@@ -28,7 +28,6 @@ namespace CarRentalAPI.Data
         public string InsuranceNumber { get; set; }
     
         public virtual Booking Booking { get; set; }
-        public virtual Car Car { get; set; }
         public virtual Client Client { get; set; }
     }
 }

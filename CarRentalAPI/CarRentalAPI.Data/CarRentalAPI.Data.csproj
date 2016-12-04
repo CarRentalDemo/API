@@ -54,9 +54,6 @@
     <Compile Include="Booking.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Car.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="CarType.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>

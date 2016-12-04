@@ -154,7 +154,6 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\OData\BookingsController.cs" />
-    <Compile Include="Controllers\OData\CarsController.cs" />
     <Compile Include="Controllers\OData\CarTypesController.cs" />
     <Compile Include="Controllers\OData\ClientsController.cs" />
     <Compile Include="Controllers\HealthController.cs" />

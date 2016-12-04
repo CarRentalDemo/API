@@ -151,13 +151,6 @@ namespace CarRentalAPI.WebAPI.Controllers.OData
             return SingleResult.Create(db.Rents.Where(m => m.Id == key).Select(m => m.Booking));
         }
 
-        // GET: odata/Rents(5)/Car
-        [EnableQuery]
-        public SingleResult<Car> GetCar([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Rents.Where(m => m.Id == key).Select(m => m.Car));
-        }
-
         // GET: odata/Rents(5)/Client
         [EnableQuery]
         public SingleResult<Client> GetClient([FromODataUri] int key)

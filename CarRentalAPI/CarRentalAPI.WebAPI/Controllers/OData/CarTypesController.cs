@@ -150,13 +150,6 @@ namespace CarRentalAPI.WebAPI.Controllers.OData
             return db.CarTypes.Where(m => m.Id == key).SelectMany(m => m.Bookings);
         }
 
-        // GET: odata/CarTypes(5)/Cars
-        [EnableQuery]
-        public IQueryable<Car> GetCars([FromODataUri] byte key)
-        {
-            return db.CarTypes.Where(m => m.Id == key).SelectMany(m => m.Cars);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
