@@ -24,7 +24,7 @@ namespace CarRentalAPI.Data
         public string Vendor { get; set; }
         public string Model { get; set; }
         public string Number { get; set; }
-        public byte CarTypeId { get; set; }
+        public int CarTypeId { get; set; }
         public decimal Mileage { get; set; }
     
         public virtual CarType CarType { get; set; }

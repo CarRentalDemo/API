@@ -22,7 +22,7 @@ namespace CarRentalAPI.Data
     
         public int Id { get; set; }
         public int ClientId { get; set; }
-        public byte CarTypeId { get; set; }
+        public int CarTypeId { get; set; }
         public System.DateTime DateFrom { get; set; }
         public System.DateTime DateTo { get; set; }
     

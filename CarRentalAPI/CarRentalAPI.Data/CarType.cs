@@ -21,11 +21,11 @@ namespace CarRentalAPI.Data
             this.Cars = new HashSet<Car>();
         }
     
-        public byte Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal DayPrice { get; set; }
-        public decimal KilometerPrice { get; set; }
         public decimal DayMultiplier { get; set; }
+        public decimal KilometerPrice { get; set; }
         public decimal KilometerMultiplier { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
