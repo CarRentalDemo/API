@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\OData\BookingsForRentController.cs" />
     <Compile Include="Controllers\OData\BookingsController.cs" />
     <Compile Include="Controllers\OData\CarTypesController.cs" />
     <Compile Include="Controllers\OData\ClientsController.cs" />

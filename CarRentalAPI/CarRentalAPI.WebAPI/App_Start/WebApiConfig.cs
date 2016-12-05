@@ -26,7 +26,9 @@ namespace CarRentalAPI.WebAPI
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             config.Count().Filter().OrderBy().Expand().Select().MaxTop(null);
+
             builder.EntitySet<Booking>("Bookings");
+            builder.EntitySet<Booking>("BookingsForRent");
             builder.EntitySet<CarType>("CarTypes");
             builder.EntitySet<Client>("Clients");
             builder.EntitySet<Rent>("Rents");
