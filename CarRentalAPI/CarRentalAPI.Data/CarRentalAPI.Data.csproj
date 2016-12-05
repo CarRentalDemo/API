@@ -79,6 +79,9 @@
     <Compile Include="Rent.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Setting.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

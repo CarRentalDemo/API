@@ -26,9 +26,10 @@ namespace CarRentalAPI.Data
         public string FullName { get; set; }
         public string Phones { get; set; }
         public string InsuranceNumber { get; set; }
+        public string RegistrationNumber { get; set; }
     
         public virtual Booking Booking { get; set; }
-        public virtual CarType CarType { get; set; }
         public virtual Client Client { get; set; }
+        public virtual CarType CarType { get; set; }
     }
 }

@@ -26,8 +26,9 @@ namespace CarRentalAPI.Data
         }
     
         public virtual DbSet<Booking> Bookings { get; set; }
-        public virtual DbSet<CarType> CarTypes { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<CarType> CarTypes { get; set; }
     }
 }

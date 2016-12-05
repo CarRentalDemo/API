@@ -26,9 +26,9 @@ namespace CarRentalAPI.Data
         public System.DateTime DateFrom { get; set; }
         public System.DateTime DateTo { get; set; }
     
-        public virtual CarType CarType { get; set; }
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rent> Rents { get; set; }
+        public virtual CarType CarType { get; set; }
     }
 }

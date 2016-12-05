@@ -6,14 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="73de7affb9b34bbbbb1cbd52bd76a84b" Name="Diagram1">
         <EntityTypeShape EntityType="CarRentalDatabaseModel.Booking" Width="1.5" PointX="3" PointY="1.75" />
-        <EntityTypeShape EntityType="CarRentalDatabaseModel.CarType" Width="1.5" PointX="0.5" PointY="3.75" />
         <EntityTypeShape EntityType="CarRentalDatabaseModel.Client" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="CarRentalDatabaseModel.Rent" Width="1.5" PointX="6" PointY="0.875" />
-        <AssociationConnector Association="CarRentalDatabaseModel.FK_Bookings_CarTypes" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Bookings_Clients" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Rents_Bookings" />
-        <AssociationConnector Association="CarRentalDatabaseModel.FK_Rents_CarTypes" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Rents_Clients" />
+        <EntityTypeShape EntityType="CarRentalDatabaseModel.Setting" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="CarRentalDatabaseModel.CarType" Width="1.5" PointX="0.5" PointY="3.625" />
+        <AssociationConnector Association="CarRentalDatabaseModel.FK_Bookings_CarTypes" />
+        <AssociationConnector Association="CarRentalDatabaseModel.FK_Rents_CarTypes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

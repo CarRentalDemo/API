@@ -21,9 +21,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DayPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="DayMultiplier" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="KilometerPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="KilometerMultiplier" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Clients">
@@ -43,6 +41,7 @@
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="BookingId" Type="int" Nullable="false" />
           <Property Name="CarTypeId" Type="int" Nullable="false" />
+          <Property Name="RegistrationNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="DateFrom" Type="smalldatetime" Nullable="false" />
           <Property Name="DateTo" Type="smalldatetime" />
           <Property Name="InitialMileage" Type="decimal" Precision="9" Scale="2" Nullable="false" />
@@ -51,6 +50,14 @@
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Phones" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="InsuranceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="KilometerPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
         </EntityType>
         <Association Name="FK_Bookings_CarTypes">
           <End Role="CarTypes" Type="Self.CarTypes" Multiplicity="1" />
@@ -117,6 +124,7 @@
           <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rents" EntityType="Self.Rents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Bookings_CarTypes" Association="Self.FK_Bookings_CarTypes">
             <End Role="CarTypes" EntitySet="CarTypes" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -144,13 +152,8 @@
       <Schema Namespace="CarRentalDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CarRentalDatabase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bookings" EntityType="CarRentalDatabaseModel.Booking" />
-          <EntitySet Name="CarTypes" EntityType="CarRentalDatabaseModel.CarType" />
           <EntitySet Name="Clients" EntityType="CarRentalDatabaseModel.Client" />
           <EntitySet Name="Rents" EntityType="CarRentalDatabaseModel.Rent" />
-          <AssociationSet Name="FK_Bookings_CarTypes" Association="CarRentalDatabaseModel.FK_Bookings_CarTypes">
-            <End Role="CarType" EntitySet="CarTypes" />
-            <End Role="Booking" EntitySet="Bookings" />
-          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Clients" Association="CarRentalDatabaseModel.FK_Bookings_Clients">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Booking" EntitySet="Bookings" />
@@ -159,12 +162,18 @@
             <End Role="Booking" EntitySet="Bookings" />
             <End Role="Rent" EntitySet="Rents" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rents_CarTypes" Association="CarRentalDatabaseModel.FK_Rents_CarTypes">
-            <End Role="CarType" EntitySet="CarTypes" />
-            <End Role="Rent" EntitySet="Rents" />
-          </AssociationSet>
           <AssociationSet Name="FK_Rents_Clients" Association="CarRentalDatabaseModel.FK_Rents_Clients">
             <End Role="Client" EntitySet="Clients" />
+            <End Role="Rent" EntitySet="Rents" />
+          </AssociationSet>
+          <EntitySet Name="Settings" EntityType="CarRentalDatabaseModel.Setting" />
+          <EntitySet Name="CarTypes" EntityType="CarRentalDatabaseModel.CarType" />
+          <AssociationSet Name="FK_Bookings_CarTypes" Association="CarRentalDatabaseModel.FK_Bookings_CarTypes">
+            <End Role="CarType" EntitySet="CarTypes" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rents_CarTypes" Association="CarRentalDatabaseModel.FK_Rents_CarTypes">
+            <End Role="CarType" EntitySet="CarTypes" />
             <End Role="Rent" EntitySet="Rents" />
           </AssociationSet>
         </EntityContainer>
@@ -177,22 +186,9 @@
           <Property Name="CarTypeId" Type="Int32" Nullable="false" />
           <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="CarType" Relationship="CarRentalDatabaseModel.FK_Bookings_CarTypes" FromRole="Booking" ToRole="CarType" />
           <NavigationProperty Name="Client" Relationship="CarRentalDatabaseModel.FK_Bookings_Clients" FromRole="Booking" ToRole="Client" />
           <NavigationProperty Name="Rents" Relationship="CarRentalDatabaseModel.FK_Rents_Bookings" FromRole="Booking" ToRole="Rent" />
-        </EntityType>
-        <EntityType Name="CarType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DayPrice" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="DayMultiplier" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="KilometerPrice" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="KilometerMultiplier" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <NavigationProperty Name="Bookings" Relationship="CarRentalDatabaseModel.FK_Bookings_CarTypes" FromRole="CarType" ToRole="Booking" />
-          <NavigationProperty Name="Rents" Relationship="CarRentalDatabaseModel.FK_Rents_CarTypes" FromRole="CarType" ToRole="Rent" />
+          <NavigationProperty Name="CarType" Relationship="CarRentalDatabaseModel.FK_Bookings_CarTypes" FromRole="Booking" ToRole="CarType" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -222,21 +218,10 @@
           <Property Name="Phones" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Booking" Relationship="CarRentalDatabaseModel.FK_Rents_Bookings" FromRole="Rent" ToRole="Booking" />
-          <NavigationProperty Name="CarType" Relationship="CarRentalDatabaseModel.FK_Rents_CarTypes" FromRole="Rent" ToRole="CarType" />
           <NavigationProperty Name="Client" Relationship="CarRentalDatabaseModel.FK_Rents_Clients" FromRole="Rent" ToRole="Client" />
+          <Property Name="RegistrationNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarType" Relationship="CarRentalDatabaseModel.FK_Rents_CarTypes" FromRole="Rent" ToRole="CarType" />
         </EntityType>
-        <Association Name="FK_Bookings_CarTypes">
-          <End Type="CarRentalDatabaseModel.CarType" Role="CarType" Multiplicity="1" />
-          <End Type="CarRentalDatabaseModel.Booking" Role="Booking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Booking">
-              <PropertyRef Name="CarTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Bookings_Clients">
           <End Type="CarRentalDatabaseModel.Client" Role="Client" Multiplicity="1" />
           <End Type="CarRentalDatabaseModel.Booking" Role="Booking" Multiplicity="*" />
@@ -261,18 +246,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rents_CarTypes">
-          <End Type="CarRentalDatabaseModel.CarType" Role="CarType" Multiplicity="1" />
-          <End Type="CarRentalDatabaseModel.Rent" Role="Rent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rent">
-              <PropertyRef Name="CarTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Rents_Clients">
           <End Type="CarRentalDatabaseModel.Client" Role="Client" Multiplicity="1" />
           <End Type="CarRentalDatabaseModel.Rent" Role="Rent" Multiplicity="*" />
@@ -282,6 +255,49 @@
             </Principal>
             <Dependent Role="Rent">
               <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayPrice" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="KilometerPrice" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+        </EntityType>
+        <EntityType Name="CarType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DayMultiplier" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="KilometerMultiplier" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Bookings" Relationship="CarRentalDatabaseModel.FK_Bookings_CarTypes" FromRole="CarType" ToRole="Booking" />
+          <NavigationProperty Name="Rents" Relationship="CarRentalDatabaseModel.FK_Rents_CarTypes" FromRole="CarType" ToRole="Rent" />
+        </EntityType>
+        <Association Name="FK_Bookings_CarTypes">
+          <End Type="CarRentalDatabaseModel.CarType" Role="CarType" Multiplicity="1" />
+          <End Type="CarRentalDatabaseModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="CarTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rents_CarTypes">
+          <End Type="CarRentalDatabaseModel.CarType" Role="CarType" Multiplicity="1" />
+          <End Type="CarRentalDatabaseModel.Rent" Role="Rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rent">
+              <PropertyRef Name="CarTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -302,18 +318,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CarTypes">
-            <EntityTypeMapping TypeName="CarRentalDatabaseModel.CarType">
-              <MappingFragment StoreEntitySet="CarTypes">
-                <ScalarProperty Name="KilometerMultiplier" ColumnName="KilometerMultiplier" />
-                <ScalarProperty Name="KilometerPrice" ColumnName="KilometerPrice" />
-                <ScalarProperty Name="DayMultiplier" ColumnName="DayMultiplier" />
-                <ScalarProperty Name="DayPrice" ColumnName="DayPrice" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="CarRentalDatabaseModel.Client">
               <MappingFragment StoreEntitySet="Clients">
@@ -327,6 +331,7 @@
           <EntitySetMapping Name="Rents">
             <EntityTypeMapping TypeName="CarRentalDatabaseModel.Rent">
               <MappingFragment StoreEntitySet="Rents">
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
                 <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
                 <ScalarProperty Name="Phones" ColumnName="Phones" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -338,6 +343,25 @@
                 <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="CarRentalDatabaseModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="KilometerPrice" ColumnName="KilometerPrice" />
+                <ScalarProperty Name="DayPrice" ColumnName="DayPrice" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarTypes">
+            <EntityTypeMapping TypeName="CarRentalDatabaseModel.CarType">
+              <MappingFragment StoreEntitySet="CarTypes">
+                <ScalarProperty Name="KilometerMultiplier" ColumnName="KilometerMultiplier" />
+                <ScalarProperty Name="DayMultiplier" ColumnName="DayMultiplier" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
