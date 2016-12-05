@@ -15,7 +15,6 @@ namespace CarRentalAPI.Data
     public partial class Rent
     {
         public int Id { get; set; }
-        public int CarId { get; set; }
         public int ClientId { get; set; }
         public int BookingId { get; set; }
         public System.DateTime DateFrom { get; set; }

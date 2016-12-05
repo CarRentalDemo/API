@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="73de7affb9b34bbbbb1cbd52bd76a84b" Name="Diagram1">
-        <EntityTypeShape EntityType="CarRentalDatabaseModel.Booking" Width="1.5" PointX="2.625" PointY="3.5" />
-        <EntityTypeShape EntityType="CarRentalDatabaseModel.CarType" Width="1.5" PointX="0.5" PointY="0.75" />
-        <EntityTypeShape EntityType="CarRentalDatabaseModel.Client" Width="1.5" PointX="3.75" PointY="0.5" />
-        <EntityTypeShape EntityType="CarRentalDatabaseModel.Rent" Width="1.5" PointX="4.75" PointY="3.5" />
+        <EntityTypeShape EntityType="CarRentalDatabaseModel.Booking" Width="1.5" PointX="3.875" PointY="2" />
+        <EntityTypeShape EntityType="CarRentalDatabaseModel.CarType" Width="1.5" PointX="0.5" PointY="3.25" />
+        <EntityTypeShape EntityType="CarRentalDatabaseModel.Client" Width="1.5" PointX="0.5" PointY="0.5" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Bookings_CarTypes" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Bookings_Clients" />
+        <EntityTypeShape EntityType="CarRentalDatabaseModel.Rent" Width="1.5" PointX="6.875" PointY="0.5" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Rents_Bookings" />
         <AssociationConnector Association="CarRentalDatabaseModel.FK_Rents_Clients" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
