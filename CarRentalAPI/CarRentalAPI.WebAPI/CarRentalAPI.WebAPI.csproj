@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\PricingApiController.cs" />
     <Compile Include="Controllers\API\SettingsApiController.cs" />
     <Compile Include="Controllers\OData\BookingsForRentController.cs" />
     <Compile Include="Controllers\OData\BookingsController.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\FinalPriceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
