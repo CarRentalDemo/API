@@ -9,18 +9,6 @@ using System.Web.OData;
 
 namespace CarRentalAPI.WebAPI.Controllers.OData
 {
-    /*
-    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
-
-    using System.Web.Http.OData.Builder;
-    using System.Web.Http.OData.Extensions;
-    using CarRentalAPI.Data;
-    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<CarType>("CarTypes");
-    builder.EntitySet<Booking>("Bookings"); 
-    builder.EntitySet<Car>("Cars"); 
-    config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
-    */
     public class CarTypesController : ODataController
     {
         private CarRentalDatabase db = new CarRentalDatabase();
