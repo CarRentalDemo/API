@@ -17,6 +17,7 @@ namespace CarRentalAPI.Data
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int BookingId { get; set; }
+        public int CarTypeId { get; set; }
         public System.DateTime DateFrom { get; set; }
         public Nullable<System.DateTime> DateTo { get; set; }
         public decimal InitialMileage { get; set; }
@@ -27,6 +28,7 @@ namespace CarRentalAPI.Data
         public string InsuranceNumber { get; set; }
     
         public virtual Booking Booking { get; set; }
+        public virtual CarType CarType { get; set; }
         public virtual Client Client { get; set; }
     }
 }

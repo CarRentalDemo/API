@@ -18,6 +18,7 @@ namespace CarRentalAPI.Data
         public CarType()
         {
             this.Bookings = new HashSet<Booking>();
+            this.Rents = new HashSet<Rent>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace CarRentalAPI.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rent> Rents { get; set; }
     }
 }
