@@ -32,7 +32,6 @@ namespace CarRentalAPI.WebAPI
             builder.EntitySet<CarType>("CarTypes");
             builder.EntitySet<Client>("Clients");
             builder.EntitySet<Rent>("Rents");
-            builder.EntitySet<Setting>("Settings");
 
             config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
