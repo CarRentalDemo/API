@@ -2,6 +2,7 @@
 using CarRentalAPI.WebAPI.Model;
 using NUnit.Framework;
 using System;
+using System.Collections;
 
 namespace CarRentalAPI.WebAPI.Tests.Model
 {
@@ -9,22 +10,35 @@ namespace CarRentalAPI.WebAPI.Tests.Model
     public class FinalPriceModelTest
     {
         [Test]
-        public void CalculateFinalPriceAsyncTest()
+        [TestCaseSource("TestCases")]
+        public decimal CalculateFinalPriceAsyncTest(
+            decimal DayMultiplier, decimal DayPrice,
+            decimal KilometerMultiplier, decimal KilometerPrice,
+            DateTime DateFrom, DateTime DateTo,
+            decimal InitialMileage, decimal FinalMileage)
         {
             var model = new FinalPriceModel(
-                new CarType { DayMultiplier = 1, KilometerMultiplier = 0 },
-                new Setting { DayPrice = 100, KilometerPrice = 5 });
+                new CarType { DayMultiplier = DayMultiplier, KilometerMultiplier = KilometerMultiplier },
+                new Setting { DayPrice = DayPrice, KilometerPrice = KilometerPrice });
 
-            model.DateFrom = new DateTime(2016, 12, 1, 10, 0, 0);
-            model.DateTo = new DateTime(2016, 12, 5, 20, 10, 10);
+            model.DateFrom = DateFrom;
+            model.DateTo = DateTo;
 
-            model.InitialMileage = 100;
-            model.FinalMileage = 200;
+            model.InitialMileage = InitialMileage;
+            model.FinalMileage = FinalMileage;
+            
+            return model.CalculateFinalPriceAsync().Result;
+        }
 
-            var expected = 600;
-            var actual = model.CalculateFinalPriceAsync().Result;
-
-            Assert.AreEqual(expected, actual);
+        public static IEnumerable TestCases
+        {
+            get
+            {
+                yield return new TestCaseData(1m, 100m, 0m, 20m, new DateTime(2016, 12, 1, 10, 0, 0), new DateTime(2016, 12, 5, 20, 10, 10), 100m, 200m).Returns(600);
+                yield return new TestCaseData(1m, 100m, 1m, 20m, new DateTime(2016, 12, 1, 10, 0, 0), new DateTime(2016, 12, 5, 20, 10, 10), 100m, 200m).Returns(2600);
+                yield return new TestCaseData(0m, 100m, 0m, 20m, new DateTime(2016, 12, 1, 10, 0, 0), new DateTime(2016, 12, 5, 20, 10, 10), 100m, 200m).Returns(0);
+                yield return new TestCaseData(1m, 100m, 1.5m, 20m, new DateTime(2016, 12, 1, 10, 0, 0), new DateTime(2016, 12, 5, 20, 10, 10), 100m, 200m).Returns(3600);
+            }
         }
     }
 }
